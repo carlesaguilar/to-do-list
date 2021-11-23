@@ -6,6 +6,9 @@ import com.carlesaguilar.todolist.feature_task.data.data_source.TaskDatabase
 import com.carlesaguilar.todolist.feature_task.data.data_source.TaskDatabase.Companion.DATABASE_NAME
 import com.carlesaguilar.todolist.feature_task.data.repository.TaskRepositoryImpl
 import com.carlesaguilar.todolist.feature_task.domain.repository.TaskRepository
+import com.carlesaguilar.todolist.feature_task.domain.use_case.DeleteTaskUseCase
+import com.carlesaguilar.todolist.feature_task.domain.use_case.GetTasksUseCase
+import com.carlesaguilar.todolist.feature_task.domain.use_case.TaskUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,5 +33,14 @@ object AppModule {
     @Singleton
     fun provideTaskRepository(db: TaskDatabase): TaskRepository {
         return TaskRepositoryImpl(db.taskDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTaskUseCases(repository: TaskRepository): TaskUseCases {
+        return TaskUseCases(
+            getTasks = GetTasksUseCase(repository),
+            deleteTask = DeleteTaskUseCase(repository)
+        )
     }
 }
