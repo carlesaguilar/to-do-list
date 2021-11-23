@@ -1,4 +1,4 @@
-package com.carlesaguilar.todolist
+package com.carlesaguilar.todolist.feature_task.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
