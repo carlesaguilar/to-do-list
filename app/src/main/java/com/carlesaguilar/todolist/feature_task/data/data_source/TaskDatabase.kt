@@ -10,4 +10,8 @@ import com.carlesaguilar.todolist.feature_task.domain.model.Task
 )
 abstract class TaskDatabase : RoomDatabase() {
     abstract val taskDao: TaskDao
+
+    companion object {
+        const val DATABASE_NAME = "tasks_db"
+    }
 }
