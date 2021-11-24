@@ -6,6 +6,7 @@ import com.carlesaguilar.todolist.feature_task.data.data_source.TaskDatabase
 import com.carlesaguilar.todolist.feature_task.data.data_source.TaskDatabase.Companion.DATABASE_NAME
 import com.carlesaguilar.todolist.feature_task.data.repository.TaskRepositoryImpl
 import com.carlesaguilar.todolist.feature_task.domain.repository.TaskRepository
+import com.carlesaguilar.todolist.feature_task.domain.use_case.AddTaskUseCase
 import com.carlesaguilar.todolist.feature_task.domain.use_case.DeleteTaskUseCase
 import com.carlesaguilar.todolist.feature_task.domain.use_case.GetTasksUseCase
 import com.carlesaguilar.todolist.feature_task.domain.use_case.TaskUseCases
@@ -40,6 +41,7 @@ object AppModule {
     fun provideTaskUseCases(repository: TaskRepository): TaskUseCases {
         return TaskUseCases(
             getTasks = GetTasksUseCase(repository),
+            addTask = AddTaskUseCase(repository),
             deleteTask = DeleteTaskUseCase(repository)
         )
     }
