@@ -15,3 +15,5 @@ data class Task(
         val taskColors = listOf(RedOrange, LightGreen, Violet, BabyBlue, RedPink)
     }
 }
+
+class InvalidTaskException(message: String) : Exception(message)
