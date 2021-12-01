@@ -99,7 +99,8 @@ fun AddEditTaskScreen(
                                     Color.Black
                                 } else {
                                     Color.Transparent
-                                }
+                                },
+                                shape = CircleShape
                             )
                             .clickable {
                                 scope.launch {
@@ -115,7 +116,7 @@ fun AddEditTaskScreen(
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            //Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
                 text = titleState.text,
                 hint = titleState.hint,
@@ -126,6 +127,7 @@ fun AddEditTaskScreen(
                     viewModel.onEvent(AddEditTaskEvent.ChangeTitleFocus(it))
                 },
                 isHintVisible = titleState.isHintVisible,
+                singleLine = false,
                 textStyle = MaterialTheme.typography.h5
             )
         }

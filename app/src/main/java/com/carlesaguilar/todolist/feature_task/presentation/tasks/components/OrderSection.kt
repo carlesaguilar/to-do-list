@@ -23,13 +23,13 @@ fun OrderSection(
             Spacer(modifier = Modifier.width(8.dp))
             DefaultRadioButton(
                 text = "Date",
-                selected = taskOrder is TaskOrder.Title,
+                selected = taskOrder is TaskOrder.Date,
                 onSelect = { onOrderChange(TaskOrder.Date(taskOrder.orderType)) }
             )
             Spacer(modifier = Modifier.width(8.dp))
             DefaultRadioButton(
                 text = "Color",
-                selected = taskOrder is TaskOrder.Title,
+                selected = taskOrder is TaskOrder.Color,
                 onSelect = { onOrderChange(TaskOrder.Color(taskOrder.orderType)) }
             )
         }

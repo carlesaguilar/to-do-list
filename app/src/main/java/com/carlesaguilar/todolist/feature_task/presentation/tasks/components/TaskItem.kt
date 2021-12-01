@@ -77,7 +77,11 @@ fun TaskItem(
             onClick = onDeleteClick,
             modifier = Modifier.align(Alignment.BottomEnd)
         ) {
-            Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete task")
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = "Delete task",
+                tint = MaterialTheme.colors.onSurface
+            )
         }
     }
 }

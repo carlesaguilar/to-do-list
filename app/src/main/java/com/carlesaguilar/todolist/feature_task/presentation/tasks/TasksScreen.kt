@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.carlesaguilar.todolist.feature_task.presentation.tasks.components.OrderSection
+import com.carlesaguilar.todolist.feature_task.presentation.util.Screen
 import kotlinx.coroutines.launch
 
 @ExperimentalAnimationApi
@@ -34,7 +35,7 @@ fun TasksScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-
+                    navController.navigate(Screen.AddEditTaskScreen.route)
                 },
                 backgroundColor = MaterialTheme.colors.primary
             ) {
@@ -90,7 +91,9 @@ fun TasksScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-
+                                navController.navigate(
+                                    Screen.AddEditTaskScreen.route + "?taskId=${task.id}&taskColor=${task.color}"
+                                )
                             },
                         onDeleteClick = {
                             viewModel.onEvent(TasksEvent.DeleteTask(task))
