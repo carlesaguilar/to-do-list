@@ -34,7 +34,7 @@ fun AddEditTaskScreen(
     viewModel: AddEditTaskViewModel = hiltViewModel()
 ) {
     val titleState = viewModel.taskTitle.value
-    var scaffoldState = rememberScaffoldState()
+    val scaffoldState = rememberScaffoldState()
     val taskBackgroundAnimatable = remember {
         Animatable(
             Color(if (taskColor != -1) taskColor else viewModel.taskColor.value)
@@ -70,8 +70,8 @@ fun AddEditTaskScreen(
                     contentDescription = "Save task"
                 )
             }
-            scaffoldState = scaffoldState
-        }
+        },
+        scaffoldState = scaffoldState
     ) {
         Column(
             modifier = Modifier
@@ -81,7 +81,7 @@ fun AddEditTaskScreen(
         ) {
             Row(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
                     .padding(8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -116,7 +116,7 @@ fun AddEditTaskScreen(
                     )
                 }
             }
-            //Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
                 text = titleState.text,
                 hint = titleState.hint,
