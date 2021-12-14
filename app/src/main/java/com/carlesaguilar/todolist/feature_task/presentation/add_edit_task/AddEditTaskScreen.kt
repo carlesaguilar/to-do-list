@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.carlesaguilar.todolist.core.util.TestTags
 import com.carlesaguilar.todolist.feature_task.domain.model.Task
 import com.carlesaguilar.todolist.feature_task.presentation.add_edit_task.components.TransparentHintTextField
 import kotlinx.coroutines.flow.collectLatest
@@ -67,7 +68,7 @@ fun AddEditTaskScreen(
             ) {
                 Icon(
                     imageVector = Icons.Default.Save,
-                    contentDescription = "Save task"
+                    contentDescription = "Save"
                 )
             }
         },
@@ -128,7 +129,8 @@ fun AddEditTaskScreen(
                 },
                 isHintVisible = titleState.isHintVisible,
                 singleLine = false,
-                textStyle = MaterialTheme.typography.h5
+                textStyle = MaterialTheme.typography.h5,
+                testTag = TestTags.TITLE_TEXT_FIELD
             )
         }
     }
