@@ -6,5 +6,6 @@ sealed class AddEditTaskEvent {
     data class EnteredTitle(val value: String) : AddEditTaskEvent()
     data class ChangeTitleFocus(val focusState: FocusState) : AddEditTaskEvent()
     data class ChangeColor(val color: Int) : AddEditTaskEvent()
+    data class IsCompleted(val isCompleted: Boolean) : AddEditTaskEvent()
     object SaveTask : AddEditTaskEvent()
 }

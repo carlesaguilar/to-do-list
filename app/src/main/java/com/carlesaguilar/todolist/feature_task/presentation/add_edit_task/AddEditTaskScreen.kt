@@ -7,18 +7,17 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Save
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -42,6 +41,7 @@ fun AddEditTaskScreen(
         )
     }
     val scope = rememberCoroutineScope()
+    val isTaskCompleted = remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
@@ -117,6 +117,28 @@ fun AddEditTaskScreen(
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row {
+                Checkbox(
+                    checked = viewModel.taskIsCompleted.value,
+                    onCheckedChange = {
+                        isTaskCompleted.value = it
+                        viewModel.onEvent(AddEditTaskEvent.IsCompleted(isTaskCompleted.value))
+                    },
+                    colors = CheckboxDefaults.colors(Color.Black)
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+                ClickableText(
+                    text = AnnotatedString("Mark as completed"),
+                    onClick = {
+                        isTaskCompleted.value = !isTaskCompleted.value
+                        viewModel.onEvent(AddEditTaskEvent.IsCompleted(isTaskCompleted.value))
+                    },
+                    style = MaterialTheme.typography.h6
+                )
+            }
+
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
                 text = titleState.text,

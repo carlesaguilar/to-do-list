@@ -31,6 +31,9 @@ class AddEditTaskViewModel @Inject constructor(
     private val _taskColor = mutableStateOf(Task.taskColors.random().toArgb())
     val taskColor: State<Int> = _taskColor
 
+    private val _taskIsCompleted = mutableStateOf(false)
+    val taskIsCompleted: State<Boolean> = _taskIsCompleted
+
     private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
@@ -46,6 +49,7 @@ class AddEditTaskViewModel @Inject constructor(
                             text = task.title,
                             isHintVisible = false
                         )
+                        _taskIsCompleted.value = task.isCompleted
                         _taskColor.value = task.color
                     }
                 }
@@ -68,6 +72,9 @@ class AddEditTaskViewModel @Inject constructor(
             is AddEditTaskEvent.ChangeColor -> {
                 _taskColor.value = event.color
             }
+            is AddEditTaskEvent.IsCompleted -> {
+                _taskIsCompleted.value = event.isCompleted
+            }
             AddEditTaskEvent.SaveTask -> {
                 viewModelScope.launch {
                     try {
@@ -76,6 +83,7 @@ class AddEditTaskViewModel @Inject constructor(
                                 title = taskTitle.value.text,
                                 timestamp = System.currentTimeMillis(),
                                 color = taskColor.value,
+                                isCompleted = _taskIsCompleted.value,
                                 id = currentTaskId
                             )
                         )
