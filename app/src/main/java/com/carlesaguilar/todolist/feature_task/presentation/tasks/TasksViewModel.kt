@@ -35,7 +35,6 @@ class TasksViewModel @Inject constructor(
             is TasksEvent.OnCompleteTask -> {
                 viewModelScope.launch {
                     taskUseCases.addTask(event.task)
-                    deletedTask = null
                 }
             }
             is TasksEvent.DeleteTask -> {
@@ -66,7 +65,7 @@ class TasksViewModel @Inject constructor(
         }
     }
 
-    private fun getTasks(taskOrder: TaskOrder) {
+    fun getTasks(taskOrder: TaskOrder) {
         getTasksJob?.cancel()
         getTasksJob = taskUseCases.getTasks(taskOrder).onEach { tasks ->
             _state.value = state.value.copy(
