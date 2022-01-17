@@ -98,6 +98,9 @@ fun TasksScreen(
                                     Screen.AddEditTaskScreen.route + "?taskId=${task.id}&taskColor=${task.color}"
                                 )
                             },
+                        onCompleteClick = { task ->
+                            viewModel.onEvent(TasksEvent.OnCompleteTask(task))
+                        },
                         onDeleteClick = {
                             viewModel.onEvent(TasksEvent.DeleteTask(task))
                             scope.launch {

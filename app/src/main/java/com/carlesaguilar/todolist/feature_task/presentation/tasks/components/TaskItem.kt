@@ -1,9 +1,12 @@
+import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
@@ -26,8 +29,11 @@ fun TaskItem(
     modifier: Modifier,
     cornerRadius: Dp = 10.dp,
     cutCornerSize: Dp = 30.dp,
+    onCompleteClick: (task: Task) -> Unit,
     onDeleteClick: () -> Unit
 ) {
+    val isTaskCompleted = remember { mutableStateOf(task.isCompleted) }
+
     Box(
         modifier = modifier
             .testTag(TestTags.NOTE_ITEM)
@@ -67,8 +73,13 @@ fun TaskItem(
         ) {
             Row {
                 Checkbox(
-                    checked = task.isCompleted,
-                    onCheckedChange = {},
+                    checked = isTaskCompleted.value,
+                    onCheckedChange = {
+                        isTaskCompleted.value = !isTaskCompleted.value
+                        task.isCompleted = isTaskCompleted.value
+                        onCompleteClick(task)
+                        Log.d("AAA", "*** ischecked: " + task.isCompleted)
+                    },
                     colors = CheckboxDefaults.colors(Color.Black)
                 )
                 Spacer(modifier = Modifier.width(8.dp))

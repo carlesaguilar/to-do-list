@@ -32,6 +32,12 @@ class TasksViewModel @Inject constructor(
 
     fun onEvent(event: TasksEvent) {
         when (event) {
+            is TasksEvent.OnCompleteTask -> {
+                viewModelScope.launch {
+                    taskUseCases.addTask(event.task)
+                    deletedTask = null
+                }
+            }
             is TasksEvent.DeleteTask -> {
                 viewModelScope.launch {
                     taskUseCases.deleteTask(event.task)

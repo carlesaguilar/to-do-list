@@ -9,7 +9,7 @@ data class Task(
     val title: String,
     val timestamp: Long,
     val color: Int,
-    val isCompleted: Boolean,
+    var isCompleted: Boolean,
     @PrimaryKey val id: Int? = null
 ) {
     companion object {
