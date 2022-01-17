@@ -56,4 +56,13 @@ class TasksScreenTest {
         composeRule.onNodeWithContentDescription("Sort").performClick()
         composeRule.onNodeWithTag(TestTags.ORDER_SECTION).assertIsDisplayed()
     }
+
+    @Test
+    fun clickToggleOrderSection_OpenAndClose() {
+        composeRule.onNodeWithTag(TestTags.ORDER_SECTION).assertDoesNotExist()
+        composeRule.onNodeWithContentDescription("Sort").performClick()
+        composeRule.onNodeWithTag(TestTags.ORDER_SECTION).assertIsDisplayed()
+        composeRule.onNodeWithContentDescription("Sort").performClick()
+        composeRule.onNodeWithTag(TestTags.ORDER_SECTION).assertDoesNotExist()
+    }
 }
