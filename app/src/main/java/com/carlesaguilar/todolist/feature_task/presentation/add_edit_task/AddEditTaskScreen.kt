@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -126,11 +127,13 @@ fun AddEditTaskScreen(
                         isTaskCompleted.value = it
                         viewModel.onEvent(AddEditTaskEvent.IsCompleted(isTaskCompleted.value))
                     },
-                    colors = CheckboxDefaults.colors(Color.Black)
+                    colors = CheckboxDefaults.colors(Color.Black),
+                    modifier = Modifier.testTag(TestTags.CHECKBOX_COMPLETED)
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 ClickableText(
                     text = AnnotatedString("Mark as completed"),
+                    modifier = Modifier.testTag(TestTags.LABEL_MARK_AS_COMPLETED),
                     onClick = {
                         isTaskCompleted.value = !isTaskCompleted.value
                         viewModel.onEvent(AddEditTaskEvent.IsCompleted(isTaskCompleted.value))
